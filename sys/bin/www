@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+var debug = require('debug')('Nodehub');
+// var path = require('path');
+var appPath = process.env.APP || '../../app';
+if(process.env.APP){
+	var module = process.env.APP;
+	var modulePath = "../../apps/"+module+"/app";
+	appPath = modulePath;
+}
+var app = require(appPath);
+
+app.set('port', process.env.PORT || 3000);
+
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});
