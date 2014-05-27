@@ -1,5 +1,44 @@
 extends layout
-
 block content
-  h1= title
-  p Welcome to #{title}
+	script.
+		console.log("fuck");
+		$(function(){
+			$table = $("#table-statuses");
+			$.get("/apps/",function(data){
+				$trTmpl = $table.find("tr.tmpl")
+				_.each(data,function(item){
+					$tr = $trTmpl.clone().removeClass("hide")
+					$tr.ldata(item).insertBefore($trTmpl)
+						.find(".label-status").addClass("label-"+item.status)
+				});
+				console.log(data)
+			});
+		});
+	.container#hub: .col-md-8.col-md-offset-2
+		h1 Node App Hub
+		p 
+			| Monitors apps inside 
+			code apps/
+			| directory.
+		br
+		h4 Currently Statuses:
+		table.table#table-statuses
+			thead
+				tr
+					td Status
+					td Module
+					td Port
+					td Link
+			tbody
+				tr.hide.tmpl
+					td: span.label.label-status(data-text="status")
+					td(data-text="module")
+					td(data-text="port")
+					td: a(data-href="url",target="_blank") Access
+		br
+		br
+		hr
+		p: a.btn.btn-primary(target="_blank", href="https://github.com/watert/Nodehub") View the GitHub project
+		p.text-muted
+			| made by 
+			a(target="_blank", href="https://twitter.com/watert/") @watert
