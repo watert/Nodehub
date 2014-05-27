@@ -11,4 +11,5 @@ Hub for express apps
 
 ### Needed to do:
 
-- Adds watch `apps` directory when new app directory is added.
+- Adds watch `apps` directory when new app directory is added. / with `chokidar`
+
